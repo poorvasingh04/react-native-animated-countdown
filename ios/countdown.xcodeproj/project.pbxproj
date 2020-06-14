@@ -19,6 +19,7 @@
 		3B48B15EE22BF7BE2DCF4E7F /* libPods-countdown-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6BD24FB5421745CD7F09B6E /* libPods-countdown-tvOSTests.a */; };
 		50D2C6FAA6BCE39B1FC1DD2B /* libPods-countdown-countdownTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 448DF0C1B538902F43675D6C /* libPods-countdown-countdownTests.a */; };
 		992978BF817099DAD5451336 /* libPods-countdown-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B0AAA23B958E95E2C255AE3 /* libPods-countdown-tvOS.a */; };
+		9F7749D82496212200557CCC /* timeout.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9F7749D72496212200557CCC /* timeout.mp3 */; };
 		BFF8C09CB35CD988DD2F266A /* libPods-countdown.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9511699F281D3CA89A7EE9 /* libPods-countdown.a */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		448DF0C1B538902F43675D6C /* libPods-countdown-countdownTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-countdown-countdownTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ACABC91D7314FCA235C254B /* Pods-countdown-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-countdown-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-countdown-tvOS/Pods-countdown-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		8554351FEEA81D70AF927B39 /* Pods-countdown-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-countdown-tvOS.release.xcconfig"; path = "Target Support Files/Pods-countdown-tvOS/Pods-countdown-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		9F7749D72496212200557CCC /* timeout.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = timeout.mp3; path = ../src/resources/timeout.mp3; sourceTree = "<group>"; };
 		BD9227424BD4B0C116828039 /* Pods-countdown.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-countdown.debug.xcconfig"; path = "Target Support Files/Pods-countdown/Pods-countdown.debug.xcconfig"; sourceTree = "<group>"; };
 		C5A88FFA10F73C0C533FEE08 /* Pods-countdown.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-countdown.release.xcconfig"; path = "Target Support Files/Pods-countdown/Pods-countdown.release.xcconfig"; sourceTree = "<group>"; };
 		D90F52E7CB01A1D7C0BFE7D3 /* Pods-countdown-countdownTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-countdown-countdownTests.debug.xcconfig"; path = "Target Support Files/Pods-countdown-countdownTests/Pods-countdown-countdownTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -134,7 +136,6 @@
 				2CCD188A72F83B104C92741E /* Pods-countdown-tvOSTests.debug.xcconfig */,
 				182F1D9457E5DEAEA129264D /* Pods-countdown-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -176,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				13B07FAE1A68108700A75B9A /* countdown */,
+				9F7749D6249620F200557CCC /* Resources */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* countdownTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -196,6 +198,14 @@
 				2D02E4901E0B4A5D006451C7 /* countdown-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9F7749D6249620F200557CCC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9F7749D72496212200557CCC /* timeout.mp3 */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,6 +348,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F7749D82496212200557CCC /* timeout.mp3 in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
