@@ -1,7 +1,11 @@
 import Countdown from './countdown/Countdown';
-import CountdownState from './countdown/CountdownState';
+import CountdownAction from './countdown/CountdownAction';
+import CountdownType from './countdown/CountdownType';
+import TimerDisplay from './countdown/TimerDisplay';
 
 export {
   Countdown,
-  CountdownState,
+  CountdownAction,
+  CountdownType,
+  TimerDisplay,
 };

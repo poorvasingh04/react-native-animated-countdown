@@ -7,21 +7,22 @@ import {
   View
 } from 'react-native';
 
-import { Countdown, CountdownState } from './src/views';
+import { Countdown, CountdownAction } from './src/views';
+import CountdownType from './src/views/countdown/CountdownType';
 
 function App() {
-  const [cdState, setCdState] = useState(CountdownState.STOP);
+  const [cdState, setCdState] = useState(CountdownAction.STOP);
 
   const startCountdown = () => {
-    setCdState(CountdownState.START);
+    setCdState(CountdownAction.START);
   }
 
   const stopCountdown = () => {
-    setCdState(CountdownState.STOP);
+    setCdState(CountdownAction.STOP);
   }
 
   const timeout = () => {
-    setCdState(CountdownState.STOP);
+    setCdState(CountdownAction.STOP);
     Alert.alert("Time out called");
   }
 
@@ -31,18 +32,20 @@ function App() {
       <SafeAreaView>
         <View>
           <Countdown
-            countdownState={cdState}
+            action={cdState}
             callbackOnTimeOut={timeout}
+            duration={3600}
+            type={CountdownType.TIME}
           />
           <Button 
             onPress={startCountdown}
             title={"Start"}
-            disabled={cdState === CountdownState.START}
+            disabled={cdState === CountdownAction.START}
           />
           <Button 
             onPress={stopCountdown}
             title={"Stop"}
-            disabled={cdState === CountdownState.STOP}
+            disabled={cdState === CountdownAction.STOP}
           />
         </View>
         

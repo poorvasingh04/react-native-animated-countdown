@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import {
   View, Image, Text,
 } from 'react-native';
+import PropTypes from 'prop-types';
+
 import AppConstants from '../../common/AppConstants';
 import style from './style';
 import { timeoutSound, clockTickSound } from '../../common/Sounds';
+import CountdownAction from './CountdownAction';
 import CountdownState from './CountdownState';
+import CountdownType from './CountdownType';
+import TimerDisplay from './TimerDisplay';
 
 const timeoutGif = require('../../resources/timeout.gif');
 
-const TIMER_MAX = AppConstants.TIMER_MAX;
 const TIMER_INTERVAL = AppConstants.TIMER_INTERVAL;
 
 const {
@@ -17,13 +21,16 @@ const {
 } = style;
 
 function Countdown({
-  countdownState = CountdownState.STOP,
+  action,
   callbackOnTimeOut,
-  shouldPlaySound = true,
+  shouldPlaySound,
+  type, 
+  duration, 
+  timerDisplay,
 }) {
 
   const [timer, setTimer] = useState(null);
-  const [counter, setCounter] = useState(-2);
+  const [counter, setCounter] = useState(CountdownState.DEFAULT);
 
   useEffect(() => {
     let cancel = false;
@@ -40,13 +47,13 @@ function Countdown({
     return () => {
       cancel = true;
     }
-  }, [countdownState]);
+  }, [action]);
 
   const handleCountdownState = () => {
-    const { START, STOP } = CountdownState; 
-    switch(countdownState) {
+    const { START, STOP } = CountdownAction; 
+    switch(action) {
       case START: 
-        setCounter(counter < 0 ? TIMER_MAX : counter);
+        setCounter(counter < 0 ? duration : counter);
         beginCountdown();
         return;
       case STOP:
@@ -58,25 +65,21 @@ function Countdown({
   const beginCountdown = () => {
     const timer = (setInterval(() => {
       setCounter(count => {
-        if (count === 0) {
+        if (count === CountdownState.TIMEOUT) {
+
           if (shouldPlaySound) {
             const audio = timeoutSound();
             audio.play();
           }
-          return count - 1;
-
-        } else if (count === -1) {
-
           if (callbackOnTimeOut) callbackOnTimeOut();
-
           clearInterval(timer);
-
           return count - 1;
-        }
+        } 
 
         if (shouldPlaySound) {
           clockTickSound.play();
         }
+
         return count - 1;
       });
       
@@ -98,23 +101,27 @@ function Countdown({
     if (hh < 10) {hh = "0"+hh;}
     if (mm < 10) {mm = "0"+mm;}
     if (ss < 10) {ss = "0"+ss;}
-    return mm+":"+ss;
+    if (timerDisplay === TimerDisplay.MMSS) return mm+":"+ss;
+    return hh+":"+mm+":"+ss;
   }
 
-  if (counter === -2) return null;
+  if (counter === CountdownState.DEFAULT) return null;
 
   const countdownTextView = () => {
-    if (counter <= -1) return null;
+    if (counter <= CountdownState.SHOULD_TIMEOUT) return null;
+    const displayValue = type === CountdownType.NUMBER
+                            ? counter
+                            : toTimeString(counter);
     return (
       <Text>
-        {toTimeString(counter)}
+        {displayValue}
       </Text>
     );
   } 
  
   return (
     <View>
-      { counter === -1 && shouldPlaySound ? (
+      { counter === CountdownState.SHOULD_TIMEOUT && shouldPlaySound ? (
         <Image
           source={timeoutGif}
           style={gifStyle}
@@ -125,3 +132,21 @@ function Countdown({
 }
 
 export default Countdown;
+
+Countdown.propTypes = {
+  action: PropTypes.string,
+  callbackOnTimeOut: PropTypes.func,
+  shouldPlaySound: PropTypes.bool,
+  type: PropTypes.string,
+  duration: PropTypes.number,
+  timerDisplay: PropTypes.string,
+};
+
+Countdown.defaultProps = {
+  action: CountdownAction.STOP,
+  callbackOnTimeOut: null,
+  shouldPlaySound: true,
+  type: CountdownType.NUMBER,
+  duration: AppConstants.TIMER_MAX,
+  timerDisplay: TimerDisplay.HHMMSS,
+};

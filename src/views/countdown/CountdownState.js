@@ -1,8 +1,7 @@
-import Countdown from "./Countdown";
-
 const CountdownState = {
-  START: 'START',
-  STOP: 'STOP',
+  DEFAULT: -2,
+  SHOULD_TIMEOUT: -1,
+  TIMEOUT: 0,
 };
 
 export default CountdownState;
